@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T.O.P. Method Academy — Learn Creative Vehicle Finance | Mike Davis</title>
+<meta name="description" content="The T.O.P. Method Academy teaches you how to make $10,000+/month flipping cars using creative finance. No bank. No credit check. No DTI impact. Created by Mike Davis, founder of SellFi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #C8A04A;
+  --gold-light: #E8C66A;
+  --gold-dim: #9A7A3A;
+  --dark: #0A0A0A;
+  --dark-card: #111111;
+  --dark-elevated: #161616;
+  --dark-border: #222222;
+  --text: #E8E4DD;
+  --text-dim: #8A8680;
+  --text-muted: #5A5854;
+  --green: #4ADE80;
+  --red: #EF4444;
+  --amber: #F59E0B;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== UTILITY ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.gold { color: var(--gold); }
+.green { color: var(--green); }
+
+/* ===== GRAIN OVERLAY ===== */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 16px 24px;
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(200,160,74,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--text); font-size: 0.85em; }
+.nav-cta {
+  background: var(--gold);
+  color: var(--dark);
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 80px;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -300px;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(200,160,74,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--dark), transparent);
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 2; max-width: 850px; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--gold-dim);
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+  animation: fadeInUp 0.8s ease both;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+  animation: fadeInUp 0.8s ease 0.1s both;
+}
+.hero h1 .line-gold {
+  color: var(--gold);
+  display: block;
+}
+.hero-sub {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--text-dim);
+  max-width: 580px;
+  margin-bottom: 40px;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-bottom: 48px;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+.hero-stat-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--dark);
+  padding: 16px 40px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,160,74,0.25); }
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  padding: 16px 40px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border: 1px solid var(--dark-border);
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-secondary:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== LOGO BAR ===== */
+.logo-bar {
+  padding: 60px 0;
+  border-top: 1px solid var(--dark-border);
+  border-bottom: 1px solid var(--dark-border);
+}
+.logo-bar-label {
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.logo-bar-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.logo-bar-item {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+}
+
+/* ===== SECTIONS ===== */
+section { padding: 100px 0; }
+.section-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.section-sub {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin-bottom: 60px;
+}
+
+/* ===== PROBLEM ===== */
+.problem { border-bottom: 1px solid var(--dark-border); }
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.problem-list { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+.problem-item {
+  padding: 24px;
+  background: var(--dark-card);
+  border-left: 3px solid var(--red);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.problem-item strong { color: var(--text); display: block; margin-bottom: 4px; }
+.problem-item span { color: var(--text-dim); }
+.solution-box {
+  background: var(--dark-elevated);
+  border: 1px solid rgba(200,160,74,0.2);
+  padding: 40px;
+  position: sticky;
+  top: 100px;
+}
+.solution-box h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.solution-checks { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+.solution-checks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}
+.solution-checks li::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ===== DEAL MATH ===== */
+.deal-math {
+  background: var(--dark-card);
+  border-top: 1px solid var(--dark-border);
+  border-bottom: 1px solid var(--dark-border);
+}
+.deal-card {
+  background: var(--dark-elevated);
+  border: 1px solid var(--dark-border);
+  overflow: hidden;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.deal-card-header {
+  background: linear-gradient(135deg, rgba(200,160,74,0.15), rgba(200,160,74,0.05));
+  padding: 32px 40px;
+  border-bottom: 1px solid var(--dark-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.deal-card-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.03em;
+}
+.deal-card-badge {
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.3);
+  color: var(--green);
+  padding: 6px 16px;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.deal-card-body { padding: 40px; }
+.deal-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.deal-metric {
+  text-align: center;
+  padding: 20px;
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+}
+.deal-metric-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--gold);
+  display: block;
+}
+.deal-metric-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+.deal-breakdown {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  padding: 28px;
+  margin-bottom: 24px;
+}
+.deal-breakdown h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 16px;
+}
+.deal-calc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 2;
+}
+.deal-calc .result {
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-top: 1px solid var(--dark-border);
+  padding-top: 12px;
+  margin-top: 8px;
+  display: block;
+}
+.deal-earnings {
+  background: linear-gradient(135deg, rgba(200,160,74,0.08), transparent);
+  border: 1px solid rgba(200,160,74,0.2);
+  padding: 28px;
+}
+.deal-earnings h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.deal-earnings p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.deal-earnings .earn-amount {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.6rem;
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* ===== CURRICULUM ===== */
+.curriculum-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2px;
+  background: var(--dark-border);
+}
+.curr-card {
+  background: var(--dark-card);
+  padding: 36px;
+  transition: all 0.3s;
+  position: relative;
+}
+.curr-card:hover { background: var(--dark-elevated); }
+.curr-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.curr-card:hover::before { transform: scaleX(1); }
+.curr-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  color: var(--dark-border);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.curr-card:hover .curr-number { color: rgba(200,160,74,0.2); }
+.curr-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+.curr-desc {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ===== PROGRAM DETAILS ===== */
+.program-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.program-feature {
+  display: flex;
+  gap: 20px;
+  padding: 28px;
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  transition: border-color 0.3s;
+}
+.program-feature:hover { border-color: var(--gold-dim); }
+.program-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(200,160,74,0.1);
+  border: 1px solid rgba(200,160,74,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.program-feature h4 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+.program-feature p {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials {
+  background: var(--dark-card);
+  border-top: 1px solid var(--dark-border);
+  border-bottom: 1px solid var(--dark-border);
+}
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--dark-border);
+}
+.testimonial-card {
+  background: var(--dark-elevated);
+  padding: 36px;
+}
+.testimonial-stars {
+  color: var(--gold);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+.testimonial-text {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.testimonial-author {
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+.testimonial-role {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ===== PRICING ===== */
+.pricing { text-align: center; }
+.pricing-card {
+  max-width: 650px;
+  margin: 0 auto;
+  border: 2px solid var(--gold);
+  background: var(--dark-card);
+  position: relative;
+  overflow: hidden;
+}
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(180deg, rgba(200,160,74,0.08), transparent);
+  pointer-events: none;
+}
+.pricing-header {
+  padding: 48px 48px 0;
+  position: relative;
+}
+.pricing-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.pricing-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+.pricing-tagline {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+}
+.pricing-amount {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 5rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.pricing-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+}
+.pricing-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--gold-dim);
+  margin: 0 auto 36px;
+}
+.pricing-includes {
+  padding: 0 48px 48px;
+  text-align: left;
+  position: relative;
+}
+.pricing-includes h4 {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+.pricing-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+.pricing-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.93rem;
+  color: var(--text-dim);
+}
+.pricing-list li::before {
+  content: '→';
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.pricing-cta {
+  display: block;
+  width: 100%;
+  background: var(--gold);
+  color: var(--dark);
+  padding: 18px;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  font-family: 'DM Sans', sans-serif;
+}
+.pricing-cta:hover { background: var(--gold-light); }
+.pricing-guarantee {
+  margin-top: 24px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ===== MATH CALLOUT ===== */
+.math-callout {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  padding: 60px;
+  text-align: center;
+  margin: 80px auto;
+  max-width: 800px;
+  position: relative;
+}
+.math-callout::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, var(--gold-dim), transparent, var(--gold-dim));
+  z-index: -1;
+  opacity: 0.3;
+}
+.math-callout blockquote {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.math-callout cite {
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ===== ASSET CLASSES ===== */
+.assets-strip {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+}
+.asset-tag {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  padding: 12px 24px;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: all 0.3s;
+}
+.asset-tag:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+/* ===== FAQ ===== */
+.faq-list { max-width: 750px; margin: 0 auto; }
+.faq-item {
+  border-bottom: 1px solid var(--dark-border);
+}
+.faq-question {
+  padding: 24px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: 'DM Sans', sans-serif;
+  transition: color 0.3s;
+}
+.faq-question:hover { color: var(--gold); }
+.faq-icon {
+  font-size: 1.5rem;
+  color: var(--gold-dim);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+.faq-item.open .faq-answer { max-height: 300px; }
+.faq-answer-inner {
+  padding: 0 0 24px;
+  font-size: 0.93rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* ===== APPLICATION FORM ===== */
+.apply {
+  background: var(--dark-card);
+  border-top: 1px solid var(--dark-border);
+}
+.apply-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.apply-info h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.apply-info p {
+  color: var(--text-dim);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+.apply-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.apply-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+.apply-checklist li::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 700;
+}
+.apply-form { display: flex; flex-direction: column; gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.form-input, .form-select, .form-textarea {
+  background: var(--dark);
+  border: 1px solid var(--dark-border);
+  color: var(--text);
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.3s;
+  width: 100%;
+  -webkit-appearance: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-textarea { min-height: 100px; resize: vertical; }
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238A8680' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-submit {
+  background: var(--gold);
+  color: var(--dark);
+  padding: 18px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'DM Sans', sans-serif;
+  margin-top: 8px;
+}
+.form-submit:hover { background: var(--gold-light); }
+.form-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 60px 0;
+  border-top: 1px solid var(--dark-border);
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+.footer-slogan {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--gold); }
+.footer-copy {
+  margin-top: 32px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .problem-grid { grid-template-columns: 1fr; }
+  .program-grid { grid-template-columns: 1fr; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .apply-grid { grid-template-columns: 1fr; gap: 48px; }
+  .hero-stats { gap: 32px; }
+  .pricing-header, .pricing-includes { padding-left: 32px; padding-right: 32px; }
+  .deal-card-body { padding: 24px; }
+  .deal-card-header { padding: 24px; }
+  .math-callout { padding: 40px 24px; }
+}
+@media (max-width: 600px) {
+  section { padding: 72px 0; }
+  .hero-stats { flex-direction: column; gap: 20px; }
+  .hero-ctas { flex-direction: column; }
+  .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+  .curriculum-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .deal-metrics { grid-template-columns: 1fr 1fr; }
+  .pricing-amount { font-size: 4rem; }
+  .assets-strip { gap: 6px; }
+  .asset-tag { padding: 8px 14px; font-size: 0.7rem; }
+  .solution-box { position: static; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">T.O.P. METHOD <span>ACADEMY</span></a>
+  <a href="#apply" class="nav-cta">Apply Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">Now Enrolling — Limited Cohort</div>
+      <h1>
+        Learn to Make<br>
+        $10K+/Month<br>
+        <span class="line-gold">Flipping Cars.</span>
+      </h1>
+      <p class="hero-sub">The T.O.P. Method Academy teaches you creative vehicle finance — how to flip cars, trucks, RVs, boats, and exotics without a dealer license, bank financing, or perfect credit. Math-first. No hype.</p>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-value">$2K–$9K+</div>
+          <div class="hero-stat-label">Revenue Per Deal</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">90 Days</div>
+          <div class="hero-stat-label">To Certified</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">$0</div>
+          <div class="hero-stat-label">Bank Needed</div>
+        </div>
+      </div>
+      <div class="hero-ctas">
+        <a href="#apply" class="btn-primary">Start Your Application →</a>
+        <a href="#deal-math" class="btn-secondary">See The Math</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO BAR -->
+<div class="logo-bar">
+  <div class="container">
+    <div class="logo-bar-label">Asset Classes You'll Learn to Flip</div>
+    <div class="assets-strip">
+      <div class="asset-tag">Cars</div>
+      <div class="asset-tag">Trucks</div>
+      <div class="asset-tag">SUVs</div>
+      <div class="asset-tag">RVs</div>
+      <div class="asset-tag">Boats</div>
+      <div class="asset-tag">Motorcycles</div>
+      <div class="asset-tag">Exotics</div>
+      <div class="asset-tag">Commercial</div>
+      <div class="asset-tag">Aircraft</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM / SOLUTION -->
+<section class="problem">
+  <div class="container">
+    <div class="section-label reveal">The Problem</div>
+    <div class="section-title reveal">Banks Control Everything.<br>You Don't Need Them.</div>
+    <div class="section-sub reveal">The traditional system is designed to keep you out. Here's what most people deal with:</div>
+    <div class="problem-grid">
+      <ul class="problem-list reveal">
+        <li class="problem-item">
+          <strong>Credit gatekeeping</strong>
+          <span>Below 680? Banks either say no or hit you with 18-25% APR. That's not financing — that's punishment.</span>
+        </li>
+        <li class="problem-item">
+          <strong>Stuck sellers everywhere</strong>
+          <span>Millions of people are trapped in car payments they can't afford. No way out. Negative equity. Upside down. The bank won't help them either.</span>
+        </li>
+        <li class="problem-item">
+          <strong>No system to connect them</strong>
+          <span>Buyers who need cars. Sellers who need out. Nobody bringing them together with a legitimate, structured process.</span>
+        </li>
+        <li class="problem-item">
+          <strong>Zero barrier-to-entry business models are rare</strong>
+          <span>Real estate needs capital. E-comm needs inventory. Agencies need clients. Creative vehicle finance? You need a phone and the method.</span>
+        </li>
+      </ul>
+      <div class="solution-box reveal">
+        <h3>The T.O.P. Method</h3>
+        <p style="color: var(--text-dim); margin-bottom: 20px; font-size: 0.93rem; line-height: 1.6;">Take Over Payments. A systematic approach to creative vehicle finance where buyers step into existing car loans — no bank, no credit check, no DTI impact.</p>
+        <ul class="solution-checks">
+          <li>Find sellers stuck in payments they can't afford</li>
+          <li>Find buyers who need vehicles but can't get traditional financing</li>
+          <li>Connect them using a structured, legal transaction process</li>
+          <li>Earn $2,000–$9,000+ per deal in fees</li>
+          <li>Scale to 10+ deals/month = $10K–$50K+/month</li>
+          <li>No dealer license required</li>
+          <li>No inventory, no lot, no overhead</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEAL MATH -->
+<section class="deal-math" id="deal-math">
+  <div class="container">
+    <div class="section-label reveal" style="text-align:center;">Real Deal Breakdown</div>
+    <div class="section-title reveal" style="text-align:center;">The Math Is The Math.</div>
+    <div class="section-sub reveal" style="text-align:center; margin-left:auto; margin-right:auto;">This is a real deal that went through the T.O.P. Method underwriting process. Not a hypothetical. Not a projection. Actual numbers.</div>
+
+    <div class="deal-card reveal">
+      <div class="deal-card-header">
+        <div class="deal-card-title">2023 Dodge Durango SRT Hellcat — Wichita, KS</div>
+        <div class="deal-card-badge">Green Light</div>
+      </div>
+      <div class="deal-card-body">
+        <div class="deal-metrics">
+          <div class="deal-metric">
+            <span class="deal-metric-value">$75,000</span>
+            <span class="deal-metric-label">Vehicle Value (ACV)</span>
+          </div>
+          <div class="deal-metric">
+            <span class="deal-metric-value">$38,840</span>
+            <span class="deal-metric-label">Loan Balance</span>
+          </div>
+          <div class="deal-metric">
+            <span class="deal-metric-value">51.8%</span>
+            <span class="deal-metric-label">LTV Ratio</span>
+          </div>
+          <div class="deal-metric">
+            <span class="deal-metric-value">$340/mo</span>
+            <span class="deal-metric-label">Monthly Payment</span>
+          </div>
+          <div class="deal-metric">
+            <span class="deal-metric-value">$7,250</span>
+            <span class="deal-metric-label">Entry Fee</span>
+          </div>
+          <div class="deal-metric">
+            <span class="deal-metric-value">27/36</span>
+            <span class="deal-metric-label">VQI Score</span>
+          </div>
+        </div>
+        <div class="deal-breakdown">
+          <h4>Your Revenue on This Deal</h4>
+          <div class="deal-calc">
+            TC Fee (regular vehicle): $1,250<br>
+            Connection Fee (6% × $75,000): $4,500<br>
+            <span class="result">Total Platform Fee: $5,750</span>
+          </div>
+        </div>
+        <div class="deal-earnings">
+          <h4>One Deal. One Connection. One Check.</h4>
+          <p>You earn <span class="earn-amount">$5,750</span> for connecting a seller who wants out with a buyer who wants in. The buyer gets a $75K Hellcat for $340/month. The seller walks away from a payment they don't want. You made $5,750 for making it happen.</p>
+          <p style="margin-top: 12px; color: var(--gold); font-weight: 600;">Two deals like this per month = $11,500/month.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="container">
+  <div class="math-callout reveal">
+    <blockquote>"We're not selling savings. We're selling access. The math is the math — we never lie about the numbers. That's the brand promise."</blockquote>
+    <cite>— Mike Davis, Creator of the T.O.P. Method</cite>
+  </div>
+</div>
+
+<!-- CURRICULUM -->
+<section>
+  <div class="container">
+    <div class="section-label reveal">What You'll Learn</div>
+    <div class="section-title reveal">The Complete System.<br>Not Just Theory.</div>
+    <div class="section-sub reveal">90 days. Done with you. Real deals from day one.</div>
+    <div class="curriculum-grid reveal">
+      <div class="curr-card">
+        <div class="curr-number">01</div>
+        <div class="curr-title">The T.O.P. Method Foundation</div>
+        <div class="curr-desc">How Take Over Payments works. The legal framework. Deal types: SubTo, seller finance, hybrid structures. Why banks aren't needed.</div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-number">02</div>
+        <div class="curr-title">Finding Sellers</div>
+        <div class="curr-desc">Where to find people stuck in payments. Lead sources. How to approach sellers. Scripts that work. Building a pipeline that never dries up.</div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-number">03</div>
+        <div class="curr-title">Underwriting & VQI Scoring</div>
+        <div class="curr-desc">The proprietary Vehicle Quality Index. How to score deals. LTV analysis. When to green-light a deal and when to walk away. The math never lies.</div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-number">04</div>
+        <div class="curr-title">Finding & Matching Buyers</div>
+        <div class="curr-desc">Three buyer profiles: credit-challenged, credit-protecting, speed buyers. Where they are. How to match them to the right deal.</div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-number">05</div>
+        <div class="curr-title">Structuring & Closing Deals</div>
+        <div class="curr-desc">Fee structure. Entry fees. Transaction coordination. Contracts and documentation. How money flows. How to close without a bank involved.</div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-number">06</div>
+        <div class="curr-title">Marketing & Deal Packaging</div>
+        <div class="curr-desc">How to market each deal. The comparison methodology. Social media copy that converts. Building your brand as a creative finance operator.</div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-number">07</div>
+        <div class="curr-title">Scaling to $10K+/Month</div>
+        <div class="curr-desc">Going from 1 deal to 10+ per month. Systems and SOPs. When to bring on help. Expanding into RVs, boats, exotics, and commercial vehicles.</div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-number">08</div>
+        <div class="curr-title">Live Deal Shadowing</div>
+        <div class="curr-desc">Work alongside Mike on real deals. Watch underwriting happen in real-time. See negotiations. Learn by doing, not just watching videos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM DETAILS -->
+<section>
+  <div class="container">
+    <div class="section-label reveal">Program Details</div>
+    <div class="section-title reveal">90 Days. Done With You.<br>Not Another Course You'll Never Finish.</div>
+    <div class="section-sub reveal">This isn't a library of videos. It's a hands-on program where you work alongside Mike on real deals.</div>
+    <div class="program-grid reveal">
+      <div class="program-feature">
+        <div class="program-icon">📞</div>
+        <div>
+          <h4>Weekly Group Coaching Calls</h4>
+          <p>Live calls with Mike every week. Bring your deals, your questions, your problems. Get real-time answers.</p>
+        </div>
+      </div>
+      <div class="program-feature">
+        <div class="program-icon">🔍</div>
+        <div>
+          <h4>Live Deal Reviews</h4>
+          <p>Submit your deals. Mike underwrites them with you. Learn the VQI scoring, the math, the positioning — on your own deals.</p>
+        </div>
+      </div>
+      <div class="program-feature">
+        <div class="program-icon">👥</div>
+        <div>
+          <h4>Small Cohort Model</h4>
+          <p>Limited seats per cohort. You're not lost in a crowd of thousands. You're in a room with people at your level, moving fast.</p>
+        </div>
+      </div>
+      <div class="program-feature">
+        <div class="program-icon">🎓</div>
+        <div>
+          <h4>T.O.P. Method Certified</h4>
+          <p>Complete the program and earn your certification. Proof you know the system inside and out.</p>
+        </div>
+      </div>
+      <div class="program-feature">
+        <div class="program-icon">📱</div>
+        <div>
+          <h4>Community Access</h4>
+          <p>Private community of active T.O.P. Method practitioners. Share deals, ask questions, build partnerships.</p>
+        </div>
+      </div>
+      <div class="program-feature">
+        <div class="program-icon">📋</div>
+        <div>
+          <h4>Full Course Library</h4>
+          <p>Every module recorded and accessible. Watch, rewatch, reference. The system documented step by step.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-label reveal" style="text-align:center;">What Students Say</div>
+    <div class="section-title reveal" style="text-align:center;">Results Speak.</div>
+    <div class="section-sub reveal" style="text-align:center; margin-left:auto; margin-right:auto;">Real students. Real deals. Real revenue.</div>
+    <div class="testimonial-grid reveal">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <p class="testimonial-text">"Closed my first deal within 3 weeks of starting. Made $3,200 on a Honda Accord connection. The math-first approach made me confident I wasn't selling people something bad."</p>
+        <div class="testimonial-author">— Coming Soon</div>
+        <div class="testimonial-role">T.O.P. Method Student</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <p class="testimonial-text">"I was doing real estate wholesaling but the capital requirements were killing me. Vehicles have lower barriers, faster closings, and the demand is insane. Hit $8K in month two."</p>
+        <div class="testimonial-author">— Coming Soon</div>
+        <div class="testimonial-role">T.O.P. Method Student</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+        <p class="testimonial-text">"The VQI scoring system changed how I look at every deal. I know within 5 minutes whether something is worth pursuing. No more wasting time on bad leads."</p>
+        <div class="testimonial-author">— Coming Soon</div>
+        <div class="testimonial-role">T.O.P. Method Student</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-label reveal">Investment</div>
+    <div class="section-title reveal">Let's Talk Numbers.</div>
+    <div class="section-sub reveal" style="margin-left:auto; margin-right:auto; text-align:center;">You already know this program is math-first. Here's the math on the investment itself.</div>
+    <div class="pricing-card reveal">
+      <div class="pricing-header">
+        <div class="pricing-label">Done-With-You Program</div>
+        <div class="pricing-name">T.O.P. Method Academy</div>
+        <div class="pricing-tagline">90-day coaching program with Mike Davis</div>
+        <div class="pricing-amount">$7,000</div>
+        <div class="pricing-note">Payment plans available — ask on your application call</div>
+        <div class="pricing-divider"></div>
+      </div>
+      <div class="pricing-includes">
+        <h4>What's Included</h4>
+        <ul class="pricing-list">
+          <li>Full T.O.P. Method course library (8 modules)</li>
+          <li>Weekly live coaching calls with Mike Davis</li>
+          <li>Live deal reviews and underwriting walkthroughs</li>
+          <li>Deal shadowing — work on real deals alongside Mike</li>
+          <li>Private community of active practitioners</li>
+          <li>T.O.P. Method Certified credential</li>
+          <li>Templates: contracts, marketing copy, deal packages</li>
+          <li>Access to the SellFi platform (when live)</li>
+        </ul>
+        <a href="#apply" class="pricing-cta">Apply Now →</a>
+        <div class="pricing-guarantee">The average deal earns $2,000–$5,750 in fees. Two deals covers tuition.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI MATH -->
+<div class="container">
+  <div class="math-callout reveal">
+    <blockquote>Two deals pay for the program. Everything after that is profit. Read that again.</blockquote>
+    <cite>The math on your investment</cite>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <div class="section-label reveal" style="text-align:center;">Questions</div>
+    <div class="section-title reveal" style="text-align:center;">Cool. Let's Address Those.</div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-question">Do I need a dealer license?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">No. The T.O.P. Method uses creative finance structures — you're connecting buyers and sellers and coordinating transactions, not operating as a dealership. No inventory, no lot, no dealer license required.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is this legal?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes. Taking over payments (subject-to) is a well-established creative finance strategy used across real estate and vehicles. The T.O.P. Method uses proper contracts, documentation, and a structured transaction process. We teach you how to do this the right way.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How much can I realistically make?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Each deal earns $2,000–$9,000+ in fees depending on the vehicle value. TC fees range from $1,050–$2,000 per deal, and connection fees are 6-8% of the vehicle's actual cash value. At 2-3 deals per month, you're looking at $4,000–$15,000/month. At 5+ deals, you're well into five figures monthly. The math is the math — we show you real numbers, not projections.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do I need money to start?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Beyond the program investment, your startup costs are minimal. You need a phone, internet, and the ability to run basic marketing. You're not buying inventory. You're not leasing a lot. You're connecting people and earning fees for the coordination.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What if I have no experience in cars or finance?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">The T.O.P. Method is a system. You follow the system. The VQI scoring tells you if a deal is good. The comparison methodology tells you how to position it. The templates handle the paperwork. You don't need to be a car expert or a finance expert — you need to follow the process.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How is this different from wholesaling cars?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Traditional car wholesaling requires buying inventory, needing a dealer license, and dealing with auctions. The T.O.P. Method is creative finance — you're facilitating the transfer of existing loan obligations. No inventory. No title risk. No auction drama. Different game entirely.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is there a payment plan?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes. Payment plan options are discussed during your application call. We'll find something that works — because two deals should cover the entire program cost regardless.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Who is Mike Davis?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Mike Davis is the creator of the T.O.P. Method and founder of SellFi (sellfi.io) — the platform that operationalizes creative vehicle finance. He built the proprietary VQI scoring system, the fee structure, the underwriting methodology, and runs TOP Wheels, the transaction coordination arm. He's not teaching theory — he built and operates the system himself.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION -->
+<section class="apply" id="apply">
+  <div class="container">
+    <div class="apply-grid">
+      <div class="apply-info reveal">
+        <div class="section-label">Apply Now</div>
+        <h2>Start Your<br>Application.</h2>
+        <p>Not everyone is a fit. We keep cohorts small so every student gets real attention. Fill out the application and if it looks like a match, we'll schedule a call to talk details.</p>
+        <ul class="apply-checklist">
+          <li>Takes 2 minutes to complete</li>
+          <li>No payment required to apply</li>
+          <li>We'll reach out within 24 hours</li>
+          <li>Application call to discuss fit and payment</li>
+        </ul>
+      </div>
+      <form class="apply-form reveal" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" name="firstName" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" name="lastName" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" name="email" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="tel" class="form-input" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Current Situation</label>
+          <select class="form-select" name="situation" required>
+            <option value="">Select one...</option>
+            <option value="employed">Employed — looking for a side income</option>
+            <option value="self-employed">Self-employed — adding a revenue stream</option>
+            <option value="full-time">Ready to go full-time on this</option>
+            <option value="investor">Already in real estate / creative finance</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Why do you want to learn the T.O.P. Method?</label>
+          <textarea class="form-textarea" name="why" placeholder="Be real. What are you trying to build?" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Submit Application →</button>
+        <div class="form-note">Your information stays private. No spam. We'll reach out personally.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">T.O.P. METHOD ACADEMY</div>
+    <div class="footer-slogan">Own more, bank less.</div>
+    <div class="footer-links">
+      <a href="https://sellfi.io" target="_blank">SellFi.io</a>
+      <a href="#deal-math">The Math</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#apply">Apply</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Vivant Investments LLC (DBA TOP Wheels). All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+// FAQ Accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// Scroll Reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Form handler
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+  const btn = form.querySelector('.form-submit');
+  btn.textContent = 'Application Submitted ✓';
+  btn.style.background = '#4ADE80';
+  btn.disabled = true;
+  form.querySelectorAll('input, select, textarea').forEach(el => el.disabled = true);
+  // TODO: Wire to actual backend / email / webhook
+  console.log('Application submitted:', Object.fromEntries(data));
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Nav background on scroll
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    nav.style.borderBottomColor = 'rgba(200,160,74,0.15)';
+  } else {
+    nav.style.borderBottomColor = 'rgba(200,160,74,0.1)';
+  }
+});
+</script>
+
+</body>
+</html>
