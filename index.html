@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>T.O.P. Method Academy — Learn Creative Vehicle Finance | Mike Davis</title>
-<meta name="description" content="The T.O.P. Method Academy teaches you how to make $10,000+/month flipping cars using creative finance. No bank. No credit check. No DTI impact. Created by Mike Davis, founder of SellFi.">
+<meta name="description" content="The T.O.P. Method Academy teaches you how to make $10,000+/month with creative vehicle finance. No bank. No credit check. No DTI impact. Created by Mike Davis, founder of SellFi.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -43,6 +43,7 @@ body {
 .mono { font-family: 'JetBrains Mono', monospace; }
 .gold { color: var(--gold); }
 .green { color: var(--green); }
+.red { color: var(--red); }
 
 /* ===== GRAIN OVERLAY ===== */
 body::after {
@@ -52,6 +53,41 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9999;
+}
+
+/* ===== ANIMATED GRADIENT BORDER ===== */
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+@keyframes slideDown { from { opacity: 0; max-height: 0; } to { opacity: 1; max-height: 500px; } }
+@keyframes countUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes typewriter { from { width: 0; } to { width: 100%; } }
+@keyframes blink { 50% { border-color: transparent; } }
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes drawLine {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes ripple {
+  0% { transform: scale(1); opacity: 0.4; }
+  100% { transform: scale(2.5); opacity: 0; }
 }
 
 /* ===== NAV ===== */
@@ -66,7 +102,9 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: all 0.4s ease;
 }
+nav.scrolled { padding: 12px 24px; background: rgba(10,10,10,0.95); }
 .nav-logo {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.5rem;
@@ -87,7 +125,20 @@ nav {
   border: none;
   cursor: pointer;
   transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
 }
+.nav-cta::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+.nav-cta:hover::after { width: 300px; height: 300px; }
 .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
 
 /* ===== HERO ===== */
@@ -96,16 +147,24 @@ nav {
   display: flex;
   align-items: center;
   position: relative;
-  padding-top: 80px;
+  padding: 120px 0 80px;
   overflow: hidden;
 }
-.hero::before {
-  content: '';
+.hero-bg-glow {
   position: absolute;
-  top: -200px; right: -300px;
-  width: 800px; height: 800px;
-  background: radial-gradient(circle, rgba(200,160,74,0.08) 0%, transparent 70%);
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(200,160,74,0.1) 0%, transparent 70%);
   pointer-events: none;
+  animation: float 8s ease-in-out infinite;
+}
+.hero-bg-glow-2 {
+  position: absolute;
+  bottom: -150px; left: -200px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(200,160,74,0.05) 0%, transparent 70%);
+  pointer-events: none;
+  animation: float 10s ease-in-out infinite reverse;
 }
 .hero::after {
   content: '';
@@ -115,7 +174,7 @@ nav {
   background: linear-gradient(to top, var(--dark), transparent);
   pointer-events: none;
 }
-.hero-content { position: relative; z-index: 2; max-width: 850px; }
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -136,14 +195,10 @@ nav {
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
 .hero h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3rem, 8vw, 6.5rem);
-  line-height: 0.95;
+  font-size: clamp(3.2rem, 8vw, 7rem);
+  line-height: 0.92;
   letter-spacing: -0.01em;
   margin-bottom: 28px;
   animation: fadeInUp 0.8s ease 0.1s both;
@@ -151,13 +206,23 @@ nav {
 .hero h1 .line-gold {
   color: var(--gold);
   display: block;
+  position: relative;
+}
+.hero h1 .line-gold::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 0;
+  height: 4px;
+  background: var(--gold);
+  animation: drawLine 1.2s ease 1s both;
 }
 .hero-sub {
   font-size: clamp(1.05rem, 2vw, 1.25rem);
   color: var(--text-dim);
-  max-width: 580px;
-  margin-bottom: 40px;
+  max-width: 620px;
+  margin-bottom: 44px;
   animation: fadeInUp 0.8s ease 0.2s both;
+  line-height: 1.7;
 }
 .hero-stats {
   display: flex;
@@ -165,6 +230,16 @@ nav {
   margin-bottom: 48px;
   animation: fadeInUp 0.8s ease 0.3s both;
 }
+.hero-stat { position: relative; }
+.hero-stat::after {
+  content: '';
+  position: absolute;
+  right: -24px; top: 50%;
+  transform: translateY(-50%);
+  width: 1px; height: 40px;
+  background: var(--dark-border);
+}
+.hero-stat:last-child::after { display: none; }
 .hero-stat-value {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2.8rem;
@@ -172,7 +247,7 @@ nav {
   line-height: 1;
 }
 .hero-stat-label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -187,7 +262,7 @@ nav {
 .btn-primary {
   background: var(--gold);
   color: var(--dark);
-  padding: 16px 40px;
+  padding: 18px 44px;
   font-weight: 700;
   font-size: 0.9rem;
   letter-spacing: 0.08em;
@@ -195,17 +270,28 @@ nav {
   text-decoration: none;
   border: none;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-family: 'DM Sans', sans-serif;
+  position: relative;
+  overflow: hidden;
 }
-.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,160,74,0.25); }
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+.btn-primary:hover::before { left: 100%; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(200,160,74,0.3); }
 .btn-secondary {
   background: transparent;
   color: var(--text);
-  padding: 16px 40px;
+  padding: 18px 44px;
   font-weight: 500;
   font-size: 0.9rem;
   letter-spacing: 0.05em;
@@ -217,54 +303,78 @@ nav {
   gap: 10px;
   font-family: 'DM Sans', sans-serif;
 }
-.btn-secondary:hover { border-color: var(--gold-dim); color: var(--gold); }
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); background: rgba(200,160,74,0.05); }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== LOGO BAR ===== */
-.logo-bar {
-  padding: 60px 0;
+/* ===== MARQUEE ===== */
+.marquee-wrapper {
+  overflow: hidden;
+  padding: 24px 0;
   border-top: 1px solid var(--dark-border);
   border-bottom: 1px solid var(--dark-border);
+  position: relative;
 }
-.logo-bar-label {
-  text-align: center;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 28px;
+.marquee-wrapper::before, .marquee-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
 }
-.logo-bar-items {
+.marquee-wrapper::before { left: 0; background: linear-gradient(to right, var(--dark), transparent); }
+.marquee-wrapper::after { right: 0; background: linear-gradient(to left, var(--dark), transparent); }
+.marquee-track {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 48px;
-  flex-wrap: wrap;
+  animation: marquee 30s linear infinite;
+  width: max-content;
 }
-.logo-bar-item {
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-item {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
   color: var(--text-muted);
-  letter-spacing: 0.08em;
-  opacity: 0.5;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.marquee-dot {
+  width: 4px; height: 4px;
+  background: var(--gold-dim);
+  border-radius: 50%;
 }
 
 /* ===== SECTIONS ===== */
-section { padding: 100px 0; }
+section { padding: 120px 0; }
 .section-label {
   font-size: 0.7rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 30px; height: 1px;
+  background: var(--gold);
+}
+.section-label.centered { justify-content: center; }
+.section-label.centered::after {
+  content: '';
+  width: 30px; height: 1px;
+  background: var(--gold);
 }
 .section-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
   line-height: 1;
   margin-bottom: 20px;
 }
@@ -272,71 +382,252 @@ section { padding: 100px 0; }
   font-size: 1.1rem;
   color: var(--text-dim);
   max-width: 600px;
-  margin-bottom: 60px;
+  margin-bottom: 64px;
+  line-height: 1.7;
 }
 
-/* ===== PROBLEM ===== */
-.problem { border-bottom: 1px solid var(--dark-border); }
-.problem-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
+/* ===== CREATIVE FINANCE STORY ===== */
+.cf-story {
+  position: relative;
+  border-bottom: 1px solid var(--dark-border);
+  overflow: hidden;
 }
-.problem-list { list-style: none; display: flex; flex-direction: column; gap: 24px; }
-.problem-item {
-  padding: 24px;
-  background: var(--dark-card);
-  border-left: 3px solid var(--red);
-  font-size: 0.95rem;
-  line-height: 1.6;
+.cf-story-bg {
+  position: absolute;
+  top: 0; right: 0;
+  width: 50%; height: 100%;
+  background: linear-gradient(135deg, rgba(200,160,74,0.03), transparent);
+  pointer-events: none;
 }
-.problem-item strong { color: var(--text); display: block; margin-bottom: 4px; }
-.problem-item span { color: var(--text-dim); }
-.solution-box {
-  background: var(--dark-elevated);
-  border: 1px solid rgba(200,160,74,0.2);
-  padding: 40px;
-  position: sticky;
-  top: 100px;
+.cf-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
 }
-.solution-box h3 {
+.cf-timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold-dim), var(--dark-border), var(--gold));
+}
+.cf-era {
+  padding: 40px 0 40px 64px;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cf-era.visible { opacity: 1; transform: translateX(0); }
+.cf-era::before {
+  content: '';
+  position: absolute;
+  left: 12px; top: 48px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: var(--dark);
+  transition: all 0.4s;
+  z-index: 2;
+}
+.cf-era.visible::before { background: var(--gold); box-shadow: 0 0 20px rgba(200,160,74,0.4); }
+.cf-era-decade {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.cf-era h3 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.8rem;
-  color: var(--gold);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  line-height: 1.1;
 }
-.solution-checks { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-.solution-checks li {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-size: 0.95rem;
+.cf-era p {
   color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 560px;
 }
-.solution-checks li::before {
-  content: '✓';
-  color: var(--green);
-  font-weight: 700;
+.cf-era-highlight {
+  margin-top: 16px;
+  padding: 16px 20px;
+  background: rgba(200,160,74,0.06);
+  border-left: 3px solid var(--gold);
+  font-size: 0.9rem;
+  color: var(--gold-light);
+  font-style: italic;
+}
+
+/* ===== PROBLEM SECTION ===== */
+.problem { border-bottom: 1px solid var(--dark-border); }
+.problem-scenario {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--dark-border);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.problem-side {
+  padding: 48px;
+  position: relative;
+}
+.problem-side.seller-side {
+  background: var(--dark-card);
+  border-right: 1px solid var(--dark-border);
+}
+.problem-side.traditional-side {
+  background: linear-gradient(135deg, rgba(239,68,68,0.03), var(--dark-card));
+}
+.problem-side-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.problem-side-label .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+.problem-side-label .dot.red { background: var(--red); }
+.problem-side-label .dot.amber { background: var(--amber); }
+.problem-side h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+.problem-side p {
+  color: var(--text-dim);
+  font-size: 0.93rem;
+  line-height: 1.7;
+}
+.problem-options {
+  list-style: none;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.problem-option {
+  padding: 20px;
+  background: var(--dark);
+  border: 1px solid var(--dark-border);
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: all 0.3s;
+}
+.problem-option:hover { border-color: rgba(239,68,68,0.3); }
+.problem-option-icon {
+  font-size: 1.2rem;
   flex-shrink: 0;
   margin-top: 2px;
 }
-
-/* ===== DEAL MATH ===== */
-.deal-math {
-  background: var(--dark-card);
-  border-top: 1px solid var(--dark-border);
-  border-bottom: 1px solid var(--dark-border);
+.problem-option strong { display: block; margin-bottom: 4px; font-size: 0.93rem; }
+.problem-option span { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+.problem-option .loss {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--red);
+  font-weight: 600;
+  display: block;
+  margin-top: 6px;
 }
-.deal-card {
-  background: var(--dark-elevated);
-  border: 1px solid var(--dark-border);
+
+/* ===== SOLUTION SECTION (THE FLIP) ===== */
+.solution-reveal {
+  background: var(--dark-card);
+  border-top: 3px solid var(--gold);
+  border-bottom: 1px solid var(--dark-border);
+  position: relative;
   overflow: hidden;
-  max-width: 900px;
+}
+.solution-reveal::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(200,160,74,0.1), transparent);
+  animation: float 6s ease-in-out infinite;
+}
+.solution-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
+  background: var(--dark-border);
+  margin-top: 48px;
+}
+.solution-card {
+  background: var(--dark-elevated);
+  padding: 40px 32px;
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.solution-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 3px;
+  background: var(--gold);
+  transition: width 0.4s ease;
+}
+.solution-card:hover::before { width: 100%; }
+.solution-card:hover { background: var(--dark-card); transform: translateY(-4px); }
+.solution-icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: block;
+}
+.solution-card h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+.solution-card p {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ===== DEAL WALKTHROUGH ===== */
+.deal-walk {
+  background: linear-gradient(180deg, var(--dark), var(--dark-card) 30%, var(--dark-card) 70%, var(--dark));
+}
+.deal-container {
+  max-width: 920px;
   margin: 0 auto;
 }
-.deal-card-header {
-  background: linear-gradient(135deg, rgba(200,160,74,0.15), rgba(200,160,74,0.05));
+.deal-vehicle-card {
+  border: 1px solid var(--dark-border);
+  overflow: hidden;
+  position: relative;
+}
+.deal-vehicle-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, var(--gold-dim), transparent 40%, transparent 60%, var(--gold-dim));
+  opacity: 0;
+  transition: opacity 0.6s;
+  z-index: 0;
+}
+.deal-vehicle-card:hover::before { opacity: 0.3; }
+.deal-header {
+  background: var(--dark-elevated);
   padding: 32px 40px;
   border-bottom: 1px solid var(--dark-border);
   display: flex;
@@ -344,134 +635,248 @@ section { padding: 100px 0; }
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
+  position: relative;
+  z-index: 1;
 }
-.deal-card-title {
+.deal-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   letter-spacing: 0.03em;
 }
-.deal-card-badge {
-  background: rgba(74,222,128,0.1);
-  border: 1px solid rgba(74,222,128,0.3);
-  color: var(--green);
+.deal-badge {
   padding: 6px 16px;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 600;
 }
-.deal-card-body { padding: 40px; }
+.deal-badge.underwater {
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: var(--red);
+}
+.deal-badge.green {
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.3);
+  color: var(--green);
+}
+.deal-body { padding: 40px; position: relative; z-index: 1; background: var(--dark-card); }
 .deal-metrics {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
   margin-bottom: 36px;
 }
 .deal-metric {
   text-align: center;
-  padding: 20px;
-  background: var(--dark-card);
+  padding: 20px 12px;
+  background: var(--dark);
   border: 1px solid var(--dark-border);
+  transition: all 0.3s;
 }
+.deal-metric:hover { border-color: var(--gold-dim); }
 .deal-metric-value {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: var(--gold);
   display: block;
 }
 .deal-metric-label {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
   margin-top: 6px;
 }
-.deal-breakdown {
-  background: var(--dark-card);
+
+/* ===== DEAL DRAWER (Collapsible) ===== */
+.deal-drawer {
   border: 1px solid var(--dark-border);
-  padding: 28px;
-  margin-bottom: 24px;
-}
-.deal-breakdown h4 {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gold-dim);
   margin-bottom: 16px;
+  overflow: hidden;
+  transition: all 0.3s;
 }
+.deal-drawer.open { border-color: var(--gold-dim); }
+.deal-drawer-trigger {
+  width: 100%;
+  background: var(--dark-elevated);
+  border: none;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  font-size: 0.93rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.deal-drawer-trigger:hover { background: var(--dark-card); }
+.deal-drawer-trigger .label { display: flex; align-items: center; gap: 10px; }
+.deal-drawer-trigger .label .icon { font-size: 1.1rem; }
+.deal-drawer-arrow {
+  color: var(--gold);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 1.2rem;
+}
+.deal-drawer.open .deal-drawer-arrow { transform: rotate(180deg); }
+.deal-drawer-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s;
+  background: var(--dark-card);
+}
+.deal-drawer.open .deal-drawer-content { max-height: 600px; }
+.deal-drawer-inner {
+  padding: 0 24px 24px;
+}
+.deal-comparison-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+.deal-comp-box {
+  padding: 24px;
+  border: 1px solid var(--dark-border);
+}
+.deal-comp-box.bad { background: rgba(239,68,68,0.04); border-color: rgba(239,68,68,0.15); }
+.deal-comp-box.good { background: rgba(74,222,128,0.04); border-color: rgba(74,222,128,0.15); }
+.deal-comp-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.deal-comp-box.bad .deal-comp-label { color: var(--red); }
+.deal-comp-box.good .deal-comp-label { color: var(--green); }
 .deal-calc {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--text-dim);
   line-height: 2;
 }
 .deal-calc .result {
-  color: var(--gold);
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   border-top: 1px solid var(--dark-border);
-  padding-top: 12px;
-  margin-top: 8px;
+  padding-top: 10px;
+  margin-top: 6px;
   display: block;
 }
-.deal-earnings {
+.deal-calc .result.red { color: var(--red); }
+.deal-calc .result.green { color: var(--green); }
+.deal-calc .result.gold { color: var(--gold); }
+
+/* Revenue callout */
+.deal-revenue {
   background: linear-gradient(135deg, rgba(200,160,74,0.08), transparent);
   border: 1px solid rgba(200,160,74,0.2);
-  padding: 28px;
+  padding: 32px;
+  margin-top: 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
-.deal-earnings h4 {
+.deal-revenue::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(200,160,74,0.05), transparent, rgba(200,160,74,0.05), transparent);
+  animation: rotateGlow 20s linear infinite;
+}
+.deal-revenue-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 8px;
+  position: relative;
+}
+.deal-revenue-amount {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.3rem;
+  font-size: 3.5rem;
   color: var(--gold);
-  margin-bottom: 12px;
+  line-height: 1;
+  position: relative;
 }
-.deal-earnings p {
+.deal-revenue-note {
+  font-size: 0.88rem;
   color: var(--text-dim);
-  font-size: 0.95rem;
-  line-height: 1.7;
+  margin-top: 8px;
+  position: relative;
 }
-.deal-earnings .earn-amount {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1.6rem;
-  color: var(--green);
-  font-weight: 600;
+
+/* ===== QUOTE ===== */
+.quote-section {
+  padding: 100px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.quote-section::before {
+  content: '"';
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20rem;
+  color: rgba(200,160,74,0.04);
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  line-height: 1;
+}
+.quote-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.15;
+  max-width: 800px;
+  margin: 0 auto 20px;
+  position: relative;
+}
+.quote-cite {
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* ===== CURRICULUM ===== */
 .curriculum-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2px;
   background: var(--dark-border);
 }
 .curr-card {
   background: var(--dark-card);
-  padding: 36px;
-  transition: all 0.3s;
+  padding: 40px 32px;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
+  overflow: hidden;
 }
-.curr-card:hover { background: var(--dark-elevated); }
 .curr-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 3px;
-  background: var(--gold);
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.4s ease;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .curr-card:hover::before { transform: scaleX(1); }
+.curr-card:hover { background: var(--dark-elevated); transform: translateY(-4px); }
 .curr-number {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 3rem;
-  color: var(--dark-border);
+  font-size: 3.5rem;
+  color: rgba(200,160,74,0.08);
   line-height: 1;
   margin-bottom: 12px;
+  transition: color 0.4s;
 }
-.curr-card:hover .curr-number { color: rgba(200,160,74,0.2); }
+.curr-card:hover .curr-number { color: rgba(200,160,74,0.25); }
 .curr-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.3rem;
@@ -484,41 +889,51 @@ section { padding: 100px 0; }
   line-height: 1.6;
 }
 
-/* ===== PROGRAM DETAILS ===== */
-.program-grid {
+/* ===== PROGRAM FEATURES ===== */
+.features-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 24px;
 }
-.program-feature {
+.feature-card {
   display: flex;
   gap: 20px;
-  padding: 28px;
+  padding: 32px;
   background: var(--dark-card);
   border: 1px solid var(--dark-border);
-  transition: border-color 0.3s;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
 }
-.program-feature:hover { border-color: var(--gold-dim); }
-.program-icon {
-  width: 48px;
-  height: 48px;
-  background: rgba(200,160,74,0.1);
-  border: 1px solid rgba(200,160,74,0.2);
+.feature-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0;
+  background: var(--gold);
+  transition: height 0.4s ease;
+}
+.feature-card:hover::after { height: 100%; }
+.feature-card:hover { border-color: var(--gold-dim); transform: translateX(4px); }
+.feature-icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(200,160,74,0.08);
+  border: 1px solid rgba(200,160,74,0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   flex-shrink: 0;
+  transition: all 0.4s;
 }
-.program-feature h4 {
-  font-size: 1rem;
-  margin-bottom: 6px;
+.feature-card:hover .feature-icon {
+  background: rgba(200,160,74,0.15);
+  border-color: var(--gold-dim);
+  transform: scale(1.1);
 }
-.program-feature p {
-  font-size: 0.88rem;
-  color: var(--text-dim);
-  line-height: 1.5;
-}
+.feature-card h4 { font-size: 1rem; margin-bottom: 6px; }
+.feature-card p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.5; }
 
 /* ===== TESTIMONIALS ===== */
 .testimonials {
@@ -534,11 +949,23 @@ section { padding: 100px 0; }
 }
 .testimonial-card {
   background: var(--dark-elevated);
-  padding: 36px;
+  padding: 40px;
+  transition: all 0.4s;
+  position: relative;
+}
+.testimonial-card:hover { background: var(--dark-card); }
+.testimonial-card::before {
+  content: '"';
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 6rem;
+  color: rgba(200,160,74,0.08);
+  position: absolute;
+  top: 10px; right: 20px;
+  line-height: 1;
 }
 .testimonial-stars {
   color: var(--gold);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   letter-spacing: 2px;
   margin-bottom: 16px;
 }
@@ -546,23 +973,16 @@ section { padding: 100px 0; }
   font-size: 0.95rem;
   color: var(--text-dim);
   line-height: 1.7;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   font-style: italic;
 }
-.testimonial-author {
-  font-weight: 600;
-  font-size: 0.88rem;
-}
-.testimonial-role {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
+.testimonial-author { font-weight: 600; font-size: 0.88rem; }
+.testimonial-role { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
 
 /* ===== PRICING ===== */
 .pricing { text-align: center; }
 .pricing-card {
-  max-width: 650px;
+  max-width: 680px;
   margin: 0 auto;
   border: 2px solid var(--gold);
   background: var(--dark-card);
@@ -572,13 +992,13 @@ section { padding: 100px 0; }
 .pricing-card::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 200px;
-  background: linear-gradient(180deg, rgba(200,160,74,0.08), transparent);
-  pointer-events: none;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(200,160,74,0.04), transparent, rgba(200,160,74,0.04), transparent);
+  animation: rotateGlow 30s linear infinite;
 }
 .pricing-header {
-  padding: 48px 48px 0;
+  padding: 52px 48px 0;
   position: relative;
 }
 .pricing-label {
@@ -593,29 +1013,16 @@ section { padding: 100px 0; }
   font-size: 2.5rem;
   margin-bottom: 8px;
 }
-.pricing-tagline {
-  color: var(--text-dim);
-  font-size: 0.95rem;
-  margin-bottom: 32px;
-}
+.pricing-tagline { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 36px; }
 .pricing-amount {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 5rem;
+  font-size: 5.5rem;
   color: var(--gold);
   line-height: 1;
   margin-bottom: 4px;
 }
-.pricing-note {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: 36px;
-}
-.pricing-divider {
-  width: 60px;
-  height: 1px;
-  background: var(--gold-dim);
-  margin: 0 auto 36px;
-}
+.pricing-note { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 40px; }
+.pricing-divider { width: 60px; height: 1px; background: var(--gold-dim); margin: 0 auto 40px; }
 .pricing-includes {
   padding: 0 48px 48px;
   text-align: left;
@@ -642,18 +1049,13 @@ section { padding: 100px 0; }
   font-size: 0.93rem;
   color: var(--text-dim);
 }
-.pricing-list li::before {
-  content: '→';
-  color: var(--gold);
-  font-weight: 700;
-  flex-shrink: 0;
-}
+.pricing-list li::before { content: '→'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
 .pricing-cta {
   display: block;
   width: 100%;
   background: var(--gold);
   color: var(--dark);
-  padding: 18px;
+  padding: 20px;
   font-weight: 700;
   font-size: 1rem;
   letter-spacing: 0.08em;
@@ -661,76 +1063,27 @@ section { padding: 100px 0; }
   text-decoration: none;
   border: none;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.4s;
   text-align: center;
   font-family: 'DM Sans', sans-serif;
-}
-.pricing-cta:hover { background: var(--gold-light); }
-.pricing-guarantee {
-  margin-top: 24px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  text-align: center;
-}
-
-/* ===== MATH CALLOUT ===== */
-.math-callout {
-  background: var(--dark-card);
-  border: 1px solid var(--dark-border);
-  padding: 60px;
-  text-align: center;
-  margin: 80px auto;
-  max-width: 800px;
   position: relative;
+  overflow: hidden;
 }
-.math-callout::before {
+.pricing-cta::before {
   content: '';
   position: absolute;
-  inset: -1px;
-  background: linear-gradient(135deg, var(--gold-dim), transparent, var(--gold-dim));
-  z-index: -1;
-  opacity: 0.3;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s;
 }
-.math-callout blockquote {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  line-height: 1.2;
-  color: var(--text);
-  margin-bottom: 20px;
-}
-.math-callout cite {
-  font-style: normal;
-  font-size: 0.85rem;
-  color: var(--gold);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-/* ===== ASSET CLASSES ===== */
-.assets-strip {
-  display: flex;
-  justify-content: center;
-  gap: 2px;
-  flex-wrap: wrap;
-  margin-bottom: 60px;
-}
-.asset-tag {
-  background: var(--dark-card);
-  border: 1px solid var(--dark-border);
-  padding: 12px 24px;
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  transition: all 0.3s;
-}
-.asset-tag:hover { border-color: var(--gold-dim); color: var(--gold); }
+.pricing-cta:hover::before { left: 100%; }
+.pricing-cta:hover { background: var(--gold-light); }
+.pricing-guarantee { margin-top: 24px; font-size: 0.82rem; color: var(--text-muted); text-align: center; }
 
 /* ===== FAQ ===== */
 .faq-list { max-width: 750px; margin: 0 auto; }
-.faq-item {
-  border-bottom: 1px solid var(--dark-border);
-}
+.faq-item { border-bottom: 1px solid var(--dark-border); }
 .faq-question {
   padding: 24px 0;
   font-size: 1rem;
@@ -751,7 +1104,7 @@ section { padding: 100px 0; }
 .faq-icon {
   font-size: 1.5rem;
   color: var(--gold-dim);
-  transition: transform 0.3s;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
   margin-left: 16px;
 }
@@ -759,17 +1112,12 @@ section { padding: 100px 0; }
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s ease;
+  transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .faq-item.open .faq-answer { max-height: 300px; }
-.faq-answer-inner {
-  padding: 0 0 24px;
-  font-size: 0.93rem;
-  color: var(--text-dim);
-  line-height: 1.7;
-}
+.faq-answer-inner { padding: 0 0 24px; font-size: 0.93rem; color: var(--text-dim); line-height: 1.7; }
 
-/* ===== APPLICATION FORM ===== */
+/* ===== APPLICATION ===== */
 .apply {
   background: var(--dark-card);
   border-top: 1px solid var(--dark-border);
@@ -786,38 +1134,13 @@ section { padding: 100px 0; }
   line-height: 1;
   margin-bottom: 20px;
 }
-.apply-info p {
-  color: var(--text-dim);
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 32px;
-}
-.apply-checklist {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.apply-checklist li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.9rem;
-  color: var(--text-dim);
-}
-.apply-checklist li::before {
-  content: '✓';
-  color: var(--gold);
-  font-weight: 700;
-}
+.apply-info p { color: var(--text-dim); font-size: 1rem; line-height: 1.7; margin-bottom: 32px; }
+.apply-checklist { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.apply-checklist li { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--text-dim); }
+.apply-checklist li::before { content: '✓'; color: var(--gold); font-weight: 700; }
 .apply-form { display: flex; flex-direction: column; gap: 20px; }
 .form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-label {
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
+.form-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
 .form-input, .form-select, .form-textarea {
   background: var(--dark);
   border: 1px solid var(--dark-border);
@@ -825,14 +1148,11 @@ section { padding: 100px 0; }
   padding: 14px 16px;
   font-size: 0.95rem;
   font-family: 'DM Sans', sans-serif;
-  transition: border-color 0.3s;
+  transition: all 0.3s;
   width: 100%;
   -webkit-appearance: none;
 }
-.form-input:focus, .form-select:focus, .form-textarea:focus {
-  outline: none;
-  border-color: var(--gold);
-}
+.form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,160,74,0.1); }
 .form-textarea { min-height: 100px; resize: vertical; }
 .form-select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238A8680' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
@@ -851,16 +1171,23 @@ section { padding: 100px 0; }
   text-transform: uppercase;
   border: none;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.4s;
   font-family: 'DM Sans', sans-serif;
   margin-top: 8px;
+  position: relative;
+  overflow: hidden;
 }
+.form-submit::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s;
+}
+.form-submit:hover::before { left: 100%; }
 .form-submit:hover { background: var(--gold-light); }
-.form-note {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  text-align: center;
-}
+.form-note { font-size: 0.78rem; color: var(--text-muted); text-align: center; }
 
 /* ===== FOOTER ===== */
 footer {
@@ -868,72 +1195,59 @@ footer {
   border-top: 1px solid var(--dark-border);
   text-align: center;
 }
-.footer-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem;
-  color: var(--gold);
-  letter-spacing: 0.1em;
-  margin-bottom: 8px;
-}
-.footer-slogan {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: 24px;
-}
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-.footer-links a {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.3s;
-}
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 8px; }
+.footer-slogan { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; }
+.footer-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+.footer-links a { font-size: 0.82rem; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
 .footer-links a:hover { color: var(--gold); }
-.footer-copy {
-  margin-top: 32px;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
+.footer-copy { margin-top: 32px; font-size: 0.75rem; color: var(--text-muted); }
 
 /* ===== SCROLL REVEAL ===== */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.from-left { transform: translateX(-40px); }
+.reveal.from-right { transform: translateX(40px); }
+.reveal.scale-in { transform: scale(0.92); }
+.reveal.visible { opacity: 1; transform: translate(0) scale(1); }
+
+/* Stagger children */
+.stagger-children > * { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.stagger-children.visible > *:nth-child(1) { transition-delay: 0s; }
+.stagger-children.visible > *:nth-child(2) { transition-delay: 0.1s; }
+.stagger-children.visible > *:nth-child(3) { transition-delay: 0.2s; }
+.stagger-children.visible > *:nth-child(4) { transition-delay: 0.3s; }
+.stagger-children.visible > *:nth-child(5) { transition-delay: 0.35s; }
+.stagger-children.visible > *:nth-child(6) { transition-delay: 0.4s; }
+.stagger-children.visible > *:nth-child(7) { transition-delay: 0.45s; }
+.stagger-children.visible > *:nth-child(8) { transition-delay: 0.5s; }
+.stagger-children.visible > * { opacity: 1; transform: translateY(0); }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
-  .problem-grid { grid-template-columns: 1fr; }
-  .program-grid { grid-template-columns: 1fr; }
+  .problem-scenario { grid-template-columns: 1fr; }
+  .problem-side.seller-side { border-right: none; border-bottom: 1px solid var(--dark-border); }
+  .solution-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
   .testimonial-grid { grid-template-columns: 1fr; }
   .apply-grid { grid-template-columns: 1fr; gap: 48px; }
   .hero-stats { gap: 32px; }
+  .deal-comparison-row { grid-template-columns: 1fr; }
   .pricing-header, .pricing-includes { padding-left: 32px; padding-right: 32px; }
-  .deal-card-body { padding: 24px; }
-  .deal-card-header { padding: 24px; }
-  .math-callout { padding: 40px 24px; }
+  .deal-body { padding: 24px; }
+  .deal-header { padding: 24px; }
 }
 @media (max-width: 600px) {
-  section { padding: 72px 0; }
+  section { padding: 80px 0; }
   .hero-stats { flex-direction: column; gap: 20px; }
+  .hero-stat::after { display: none; }
   .hero-ctas { flex-direction: column; }
   .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
   .curriculum-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .deal-metrics { grid-template-columns: 1fr 1fr; }
   .pricing-amount { font-size: 4rem; }
-  .assets-strip { gap: 6px; }
-  .asset-tag { padding: 8px 14px; font-size: 0.7rem; }
-  .solution-box { position: static; }
+  .cf-timeline::before { left: 16px; }
+  .cf-era { padding-left: 52px; }
+  .cf-era::before { left: 8px; }
 }
 </style>
 </head>
@@ -947,148 +1261,322 @@ footer {
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-bg-glow-2"></div>
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge">Now Enrolling — Limited Cohort</div>
       <h1>
-        Learn to Make<br>
-        $10K+/Month<br>
-        <span class="line-gold">Flipping Cars.</span>
+        The Dealership<br>Said No.<br>
+        <span class="line-gold">You Say When.</span>
       </h1>
-      <p class="hero-sub">The T.O.P. Method Academy teaches you creative vehicle finance — how to flip cars, trucks, RVs, boats, and exotics without a dealer license, bank financing, or perfect credit. Math-first. No hype.</p>
+      <p class="hero-sub">Creative finance has been building wealth in real estate for decades. Now it's come to vehicles. The T.O.P. Method teaches you how to flip cars, trucks, RVs, boats, and exotics using the same strategies — no bank, no credit check, no dealer license. You solve real problems for real people and get paid for it.</p>
       <div class="hero-stats">
-        <div>
+        <div class="hero-stat">
           <div class="hero-stat-value">$2K–$9K+</div>
           <div class="hero-stat-label">Revenue Per Deal</div>
         </div>
-        <div>
+        <div class="hero-stat">
           <div class="hero-stat-value">90 Days</div>
           <div class="hero-stat-label">To Certified</div>
         </div>
-        <div>
+        <div class="hero-stat">
           <div class="hero-stat-value">$0</div>
           <div class="hero-stat-label">Bank Needed</div>
         </div>
       </div>
       <div class="hero-ctas">
         <a href="#apply" class="btn-primary">Start Your Application →</a>
-        <a href="#deal-math" class="btn-secondary">See The Math</a>
+        <a href="#deal-math" class="btn-secondary">See a Real Deal ↓</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LOGO BAR -->
-<div class="logo-bar">
-  <div class="container">
-    <div class="logo-bar-label">Asset Classes You'll Learn to Flip</div>
-    <div class="assets-strip">
-      <div class="asset-tag">Cars</div>
-      <div class="asset-tag">Trucks</div>
-      <div class="asset-tag">SUVs</div>
-      <div class="asset-tag">RVs</div>
-      <div class="asset-tag">Boats</div>
-      <div class="asset-tag">Motorcycles</div>
-      <div class="asset-tag">Exotics</div>
-      <div class="asset-tag">Commercial</div>
-      <div class="asset-tag">Aircraft</div>
-    </div>
+<!-- ASSET MARQUEE -->
+<div class="marquee-wrapper">
+  <div class="marquee-track">
+    <span class="marquee-item">Cars<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Trucks<span class="marquee-dot"></span></span>
+    <span class="marquee-item">SUVs<span class="marquee-dot"></span></span>
+    <span class="marquee-item">RVs & Motorhomes<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Boats<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Motorcycles<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Exotics<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Commercial Vehicles<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Aircraft<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Cars<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Trucks<span class="marquee-dot"></span></span>
+    <span class="marquee-item">SUVs<span class="marquee-dot"></span></span>
+    <span class="marquee-item">RVs & Motorhomes<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Boats<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Motorcycles<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Exotics<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Commercial Vehicles<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Aircraft<span class="marquee-dot"></span></span>
   </div>
 </div>
 
-<!-- PROBLEM / SOLUTION -->
-<section class="problem">
+<!-- CREATIVE FINANCE STORY -->
+<section class="cf-story">
+  <div class="cf-story-bg"></div>
   <div class="container">
-    <div class="section-label reveal">The Problem</div>
-    <div class="section-title reveal">Banks Control Everything.<br>You Don't Need Them.</div>
-    <div class="section-sub reveal">The traditional system is designed to keep you out. Here's what most people deal with:</div>
-    <div class="problem-grid">
-      <ul class="problem-list reveal">
-        <li class="problem-item">
-          <strong>Credit gatekeeping</strong>
-          <span>Below 680? Banks either say no or hit you with 18-25% APR. That's not financing — that's punishment.</span>
-        </li>
-        <li class="problem-item">
-          <strong>Stuck sellers everywhere</strong>
-          <span>Millions of people are trapped in car payments they can't afford. No way out. Negative equity. Upside down. The bank won't help them either.</span>
-        </li>
-        <li class="problem-item">
-          <strong>No system to connect them</strong>
-          <span>Buyers who need cars. Sellers who need out. Nobody bringing them together with a legitimate, structured process.</span>
-        </li>
-        <li class="problem-item">
-          <strong>Zero barrier-to-entry business models are rare</strong>
-          <span>Real estate needs capital. E-comm needs inventory. Agencies need clients. Creative vehicle finance? You need a phone and the method.</span>
-        </li>
-      </ul>
-      <div class="solution-box reveal">
-        <h3>The T.O.P. Method</h3>
-        <p style="color: var(--text-dim); margin-bottom: 20px; font-size: 0.93rem; line-height: 1.6;">Take Over Payments. A systematic approach to creative vehicle finance where buyers step into existing car loans — no bank, no credit check, no DTI impact.</p>
-        <ul class="solution-checks">
-          <li>Find sellers stuck in payments they can't afford</li>
-          <li>Find buyers who need vehicles but can't get traditional financing</li>
-          <li>Connect them using a structured, legal transaction process</li>
-          <li>Earn $2,000–$9,000+ per deal in fees</li>
-          <li>Scale to 10+ deals/month = $10K–$50K+/month</li>
-          <li>No dealer license required</li>
-          <li>No inventory, no lot, no overhead</li>
+    <div class="section-label reveal">The Origin</div>
+    <div class="section-title reveal">Creative Finance<br>Isn't New. It's Proven.</div>
+    <div class="section-sub reveal">For decades, the smartest investors in real estate have used creative finance to build empires — without banks. Now that same playbook applies to every asset class.</div>
+    <div class="cf-timeline">
+      <div class="cf-era">
+        <div class="cf-era-decade">1980s — Present</div>
+        <h3>Real Estate: Where It All Started</h3>
+        <p>Subject-to deals. Seller financing. Lease options. Wrap mortgages. For 40+ years, investors have been buying properties by taking over existing mortgages — no bank approval needed. Entire empires were built this way. Pace Morby's SubTo community alone has 18,000+ members doing this daily.</p>
+        <div class="cf-era-highlight">"Own more, bank less" isn't a slogan — it's how generational wealth has been built for decades.</div>
+      </div>
+      <div class="cf-era">
+        <div class="cf-era-decade">2020s</div>
+        <h3>Vehicles: The Untapped Frontier</h3>
+        <p>Millions of Americans are upside down on car loans. Dealerships offer lowball trade-ins. Banks charge 18-25% APR for anyone under 680 credit. The system is broken. But the same creative structures that work in real estate — taking over payments, seller financing — work for vehicles too. Nobody had systemized it. Until now.</p>
+      </div>
+      <div class="cf-era">
+        <div class="cf-era-decade">2026</div>
+        <h3>The T.O.P. Method: The System</h3>
+        <p>Mike Davis took the informal practice of "taking over someone's car payment" and built a legitimate business system around it. Proprietary underwriting. VQI scoring. Structured fee models. Transparent math on every deal. The T.O.P. Method isn't a hack — it's a methodology that works across cars, trucks, RVs, boats, aircraft, and exotics.</p>
+        <div class="cf-era-highlight">Every asset class. One method. The math is the math.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM (Realistic scenario) -->
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="section-label reveal">The Problem You Solve</div>
+    <div class="section-title reveal">Two People Are Stuck.<br>You're The Bridge.</div>
+    <div class="section-sub reveal">Right now, millions of sellers can't get out of their vehicles. And millions of buyers can't get into one. You step in the middle, solve both problems, and get paid.</div>
+
+    <div class="problem-scenario reveal scale-in">
+      <div class="problem-side seller-side">
+        <div class="problem-side-label"><span class="dot amber"></span> The Seller's Reality</div>
+        <h3>Stuck Paying $687/Mo on a Truck They Can't Afford</h3>
+        <p>Meet a real scenario: Someone bought a 2022 Chevy Silverado LT 4x4 two years ago. Life changed — new baby, lost overtime, whatever. They owe <strong style="color:var(--text)">$38,500</strong> but the truck is only worth <strong style="color:var(--text)">$32,000</strong>. They're <strong style="color:var(--red)">$6,500 underwater.</strong></p>
+        <ul class="problem-options">
+          <li class="problem-option">
+            <span class="problem-option-icon">🏪</span>
+            <div>
+              <strong>Option 1: Trade-in at a dealership</strong>
+              <span>Dealer offers $27,000 (wholesale). Seller owes $38,500. They'd need to bring a check for $11,500 or roll $11.5K of negative equity into a new loan at even higher payments.</span>
+              <span class="loss">Out of pocket: -$11,500</span>
+            </div>
+          </li>
+          <li class="problem-option">
+            <span class="problem-option-icon">💻</span>
+            <div>
+              <strong>Option 2: Private sale</strong>
+              <span>Best private sale offer: $30,000. Still $8,500 short of the loan balance. Seller has to bring $8,500 cash to close out the loan before they can even transfer the title.</span>
+              <span class="loss">Out of pocket: -$8,500</span>
+            </div>
+          </li>
+          <li class="problem-option">
+            <span class="problem-option-icon">🚫</span>
+            <div>
+              <strong>Option 3: Voluntary repo</strong>
+              <span>Give it back. Bank sells it at auction for $22,000, comes after the seller for the $16,500 deficiency. Credit destroyed. Possible lawsuit.</span>
+              <span class="loss">Credit destroyed + $16,500 deficiency</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="problem-side traditional-side">
+        <div class="problem-side-label"><span class="dot red"></span> The Buyer's Reality</div>
+        <h3>Needs a Reliable Truck but the Bank Said No</h3>
+        <p>Across town, a self-employed contractor needs a truck to work. Credit score: 620. Bank says no — or offers 19.5% APR with $5,000 down. That turns a $32,000 truck into a <strong style="color:var(--red)">$52,000+ total cost.</strong></p>
+        <ul class="problem-options">
+          <li class="problem-option">
+            <span class="problem-option-icon">🏦</span>
+            <div>
+              <strong>Option 1: Subprime dealership financing</strong>
+              <span>If they even qualify: $5,000 down, 19.5% APR, 72 months. Monthly payment: $762. Total cost: $54,864 + $5,000 = $59,864 for a $32K truck.</span>
+              <span class="loss">Total overpayment: $27,864</span>
+            </div>
+          </li>
+          <li class="problem-option">
+            <span class="problem-option-icon">🚗</span>
+            <div>
+              <strong>Option 2: Buy-here-pay-here</strong>
+              <span>Worse vehicles. Higher rates. Predatory terms. GPS trackers. Miss one payment, they repo. Not a path to ownership — it's a trap.</span>
+              <span class="loss">Even worse terms + predatory structure</span>
+            </div>
+          </li>
+          <li class="problem-option">
+            <span class="problem-option-icon">🚶</span>
+            <div>
+              <strong>Option 3: Keep waiting</strong>
+              <span>No truck, no work. Can't earn without the vehicle. Can't save for a vehicle without earning. Stuck in a loop.</span>
+              <span class="loss">Lost income every day without a truck</span>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DEAL MATH -->
-<section class="deal-math" id="deal-math">
-  <div class="container">
-    <div class="section-label reveal" style="text-align:center;">Real Deal Breakdown</div>
-    <div class="section-title reveal" style="text-align:center;">The Math Is The Math.</div>
-    <div class="section-sub reveal" style="text-align:center; margin-left:auto; margin-right:auto;">This is a real deal that went through the T.O.P. Method underwriting process. Not a hypothetical. Not a projection. Actual numbers.</div>
-
-    <div class="deal-card reveal">
-      <div class="deal-card-header">
-        <div class="deal-card-title">2023 Dodge Durango SRT Hellcat — Wichita, KS</div>
-        <div class="deal-card-badge">Green Light</div>
+<!-- THE SOLUTION -->
+<section class="solution-reveal">
+  <div class="container" style="position:relative; text-align:center;">
+    <div class="section-label centered reveal">The T.O.P. Method Solution</div>
+    <div class="section-title reveal" style="text-align:center;">You Walk In.<br>Both Problems Disappear.</div>
+    <div class="section-sub reveal" style="text-align:center; margin-left:auto; margin-right:auto;">Take Over Payments. The seller walks away clean — no check to write, no repo, credit intact. The buyer drives a solid truck at the existing loan terms — no bank, no credit check, no 19.5% APR. You earn a fee for making the connection.</div>
+    <div class="solution-grid reveal stagger-children">
+      <div class="solution-card">
+        <span class="solution-icon">🔓</span>
+        <h4>Seller Gets Free</h4>
+        <p>Walks away from the payment. No $8,500 check. No deficiency. No repo. They're done. You might even put a few hundred in their pocket.</p>
       </div>
-      <div class="deal-card-body">
-        <div class="deal-metrics">
-          <div class="deal-metric">
-            <span class="deal-metric-value">$75,000</span>
-            <span class="deal-metric-label">Vehicle Value (ACV)</span>
-          </div>
-          <div class="deal-metric">
-            <span class="deal-metric-value">$38,840</span>
-            <span class="deal-metric-label">Loan Balance</span>
-          </div>
-          <div class="deal-metric">
-            <span class="deal-metric-value">51.8%</span>
-            <span class="deal-metric-label">LTV Ratio</span>
-          </div>
-          <div class="deal-metric">
-            <span class="deal-metric-value">$340/mo</span>
-            <span class="deal-metric-label">Monthly Payment</span>
-          </div>
-          <div class="deal-metric">
-            <span class="deal-metric-value">$7,250</span>
-            <span class="deal-metric-label">Entry Fee</span>
-          </div>
-          <div class="deal-metric">
-            <span class="deal-metric-value">27/36</span>
-            <span class="deal-metric-label">VQI Score</span>
-          </div>
+      <div class="solution-card">
+        <span class="solution-icon">🔑</span>
+        <h4>Buyer Gets Access</h4>
+        <p>Steps into the existing loan: $687/mo at the seller's original rate. No credit check. No 19.5% APR. No $5,000 down. Entry fee + first payment = driving.</p>
+      </div>
+      <div class="solution-card">
+        <span class="solution-icon">💰</span>
+        <h4>You Get Paid</h4>
+        <p>TC fee + connection fee = $2,000–$5,000+ per deal. You solved two problems with one phone call. That's the business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL DEAL WALKTHROUGH -->
+<section class="deal-walk" id="deal-math">
+  <div class="container">
+    <div class="section-label centered reveal">Real Deal Breakdown</div>
+    <div class="section-title reveal" style="text-align:center;">The Math Is The Math.</div>
+    <div class="section-sub reveal" style="text-align:center; margin-left:auto; margin-right:auto;">This is the deal we just described — with real numbers. Not a best-case fantasy. A slightly underwater truck deal. The kind you'll see every single day.</div>
+
+    <div class="deal-container">
+      <div class="deal-vehicle-card reveal scale-in">
+        <div class="deal-header">
+          <div class="deal-title">2022 Chevrolet Silverado LT 4x4 — Dallas, TX</div>
+          <div class="deal-badge underwater">Slightly Underwater</div>
         </div>
-        <div class="deal-breakdown">
-          <h4>Your Revenue on This Deal</h4>
-          <div class="deal-calc">
-            TC Fee (regular vehicle): $1,250<br>
-            Connection Fee (6% × $75,000): $4,500<br>
-            <span class="result">Total Platform Fee: $5,750</span>
+        <div class="deal-body">
+          <div class="deal-metrics stagger-children">
+            <div class="deal-metric">
+              <span class="deal-metric-value">$32,000</span>
+              <span class="deal-metric-label">Vehicle Value (ACV)</span>
+            </div>
+            <div class="deal-metric">
+              <span class="deal-metric-value">$38,500</span>
+              <span class="deal-metric-label">Loan Balance</span>
+            </div>
+            <div class="deal-metric">
+              <span class="deal-metric-value">120%</span>
+              <span class="deal-metric-label">LTV (Underwater)</span>
+            </div>
+            <div class="deal-metric">
+              <span class="deal-metric-value">$687/mo</span>
+              <span class="deal-metric-label">Monthly Payment</span>
+            </div>
+            <div class="deal-metric">
+              <span class="deal-metric-value">$4,170</span>
+              <span class="deal-metric-label">Entry Fee</span>
+            </div>
+            <div class="deal-metric">
+              <span class="deal-metric-value">56 mo</span>
+              <span class="deal-metric-label">Remaining Term</span>
+            </div>
           </div>
-        </div>
-        <div class="deal-earnings">
-          <h4>One Deal. One Connection. One Check.</h4>
-          <p>You earn <span class="earn-amount">$5,750</span> for connecting a seller who wants out with a buyer who wants in. The buyer gets a $75K Hellcat for $340/month. The seller walks away from a payment they don't want. You made $5,750 for making it happen.</p>
-          <p style="margin-top: 12px; color: var(--gold); font-weight: 600;">Two deals like this per month = $11,500/month.</p>
+
+          <!-- Drawer: Seller's Options -->
+          <div class="deal-drawer" data-open="true">
+            <button class="deal-drawer-trigger" onclick="toggleDrawer(this)">
+              <span class="label"><span class="icon">📊</span> What the seller was facing vs. T.O.P.</span>
+              <span class="deal-drawer-arrow">▾</span>
+            </button>
+            <div class="deal-drawer-content">
+              <div class="deal-drawer-inner">
+                <div class="deal-comparison-row">
+                  <div class="deal-comp-box bad">
+                    <div class="deal-comp-label">Without You (Best Case)</div>
+                    <div class="deal-calc">
+                      Private sale offers: ~$30,000<br>
+                      Loan balance owed: $38,500<br>
+                      <span class="result red">Seller pays: -$8,500 to sell</span>
+                    </div>
+                  </div>
+                  <div class="deal-comp-box good">
+                    <div class="deal-comp-label">With T.O.P. Method</div>
+                    <div class="deal-calc">
+                      Buyer takes over $687/mo<br>
+                      Seller walks away clean: $0 owed<br>
+                      <span class="result green">Seller saves: $8,500+</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drawer: Buyer's Comparison -->
+          <div class="deal-drawer">
+            <button class="deal-drawer-trigger" onclick="toggleDrawer(this)">
+              <span class="label"><span class="icon">🧮</span> What the buyer saves vs. a dealership at 620 credit</span>
+              <span class="deal-drawer-arrow">▾</span>
+            </button>
+            <div class="deal-drawer-content">
+              <div class="deal-drawer-inner">
+                <div class="deal-comparison-row">
+                  <div class="deal-comp-box bad">
+                    <div class="deal-comp-label">Dealership Route (620 Credit)</div>
+                    <div class="deal-calc">
+                      OTD price: ~$35,200<br>
+                      Down payment (10%): $3,520<br>
+                      19.5% APR × 72 months: $762/mo<br>
+                      <span class="result red">Total cost: $58,384</span>
+                    </div>
+                  </div>
+                  <div class="deal-comp-box good">
+                    <div class="deal-comp-label">T.O.P. Method</div>
+                    <div class="deal-calc">
+                      Entry fee: $4,170<br>
+                      Monthly: $687 × 56 months<br>
+                      Existing rate (not 19.5%)<br>
+                      <span class="result green">Total cost: $42,642</span>
+                    </div>
+                  </div>
+                </div>
+                <p style="margin-top:16px; font-size:0.88rem; color:var(--text-dim); text-align:center;">
+                  The buyer <strong style="color:var(--green)">saves $15,742</strong> compared to the dealership route — and gets approved instantly with no credit check.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drawer: Your Revenue -->
+          <div class="deal-drawer">
+            <button class="deal-drawer-trigger" onclick="toggleDrawer(this)">
+              <span class="label"><span class="icon">💰</span> Your revenue on this deal</span>
+              <span class="deal-drawer-arrow">▾</span>
+            </button>
+            <div class="deal-drawer-content">
+              <div class="deal-drawer-inner">
+                <div class="deal-calc">
+                  TC Fee (regular vehicle): $1,250<br>
+                  Connection Fee (6% × $32,000): $1,920<br>
+                  <span class="result gold">Your earnings: $3,170</span>
+                </div>
+                <p style="margin-top:12px; font-size:0.88rem; color:var(--text-dim);">
+                  That's a bread-and-butter deal. Not a Hellcat. Not an exotic. A regular truck that's slightly underwater — the kind of deal that's everywhere, every single day.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="deal-revenue reveal">
+            <div class="deal-revenue-label">Three Deals Like This Per Month</div>
+            <div class="deal-revenue-amount">$9,510/mo</div>
+            <div class="deal-revenue-note">From connecting sellers who need out with buyers who need in. That's the business.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1096,10 +1584,10 @@ footer {
 </section>
 
 <!-- QUOTE -->
-<div class="container">
-  <div class="math-callout reveal">
-    <blockquote>"We're not selling savings. We're selling access. The math is the math — we never lie about the numbers. That's the brand promise."</blockquote>
-    <cite>— Mike Davis, Creator of the T.O.P. Method</cite>
+<div class="quote-section reveal">
+  <div class="container">
+    <div class="quote-text">"We're not selling savings. We're selling access.<br>The math is the math — we never lie about<br>the numbers. That's the brand promise."</div>
+    <div class="quote-cite">— Mike Davis, Creator of the T.O.P. Method</div>
   </div>
 </div>
 
@@ -1109,98 +1597,98 @@ footer {
     <div class="section-label reveal">What You'll Learn</div>
     <div class="section-title reveal">The Complete System.<br>Not Just Theory.</div>
     <div class="section-sub reveal">90 days. Done with you. Real deals from day one.</div>
-    <div class="curriculum-grid reveal">
+    <div class="curriculum-grid reveal stagger-children">
       <div class="curr-card">
         <div class="curr-number">01</div>
-        <div class="curr-title">The T.O.P. Method Foundation</div>
-        <div class="curr-desc">How Take Over Payments works. The legal framework. Deal types: SubTo, seller finance, hybrid structures. Why banks aren't needed.</div>
+        <div class="curr-title">Creative Finance Foundation</div>
+        <div class="curr-desc">How creative finance works across real estate and vehicles. SubTo, seller finance, hybrid structures. Why banks aren't needed — and never were.</div>
       </div>
       <div class="curr-card">
         <div class="curr-number">02</div>
-        <div class="curr-title">Finding Sellers</div>
-        <div class="curr-desc">Where to find people stuck in payments. Lead sources. How to approach sellers. Scripts that work. Building a pipeline that never dries up.</div>
+        <div class="curr-title">Finding Stuck Sellers</div>
+        <div class="curr-desc">Where to find people drowning in payments. Lead sources that never dry up. Scripts that convert. Building a pipeline of underwater vehicles.</div>
       </div>
       <div class="curr-card">
         <div class="curr-number">03</div>
         <div class="curr-title">Underwriting & VQI Scoring</div>
-        <div class="curr-desc">The proprietary Vehicle Quality Index. How to score deals. LTV analysis. When to green-light a deal and when to walk away. The math never lies.</div>
+        <div class="curr-desc">The proprietary Vehicle Quality Index. How to score deals in 5 minutes. LTV analysis. When to green-light and when to walk. The math never lies.</div>
       </div>
       <div class="curr-card">
         <div class="curr-number">04</div>
-        <div class="curr-title">Finding & Matching Buyers</div>
-        <div class="curr-desc">Three buyer profiles: credit-challenged, credit-protecting, speed buyers. Where they are. How to match them to the right deal.</div>
+        <div class="curr-title">Matching Buyers to Deals</div>
+        <div class="curr-desc">Three buyer types: credit-challenged, credit-protecting, speed buyers. Where they are. How to present a deal so the math sells itself.</div>
       </div>
       <div class="curr-card">
         <div class="curr-number">05</div>
-        <div class="curr-title">Structuring & Closing Deals</div>
-        <div class="curr-desc">Fee structure. Entry fees. Transaction coordination. Contracts and documentation. How money flows. How to close without a bank involved.</div>
+        <div class="curr-title">Structuring & Closing</div>
+        <div class="curr-desc">Fee structure. Entry fees. Contracts. Transaction coordination. How money flows. How to close a deal without a bank touching anything.</div>
       </div>
       <div class="curr-card">
         <div class="curr-number">06</div>
         <div class="curr-title">Marketing & Deal Packaging</div>
-        <div class="curr-desc">How to market each deal. The comparison methodology. Social media copy that converts. Building your brand as a creative finance operator.</div>
+        <div class="curr-desc">Math-first marketing copy that converts. The comparison methodology. Social content that educates and sells simultaneously.</div>
       </div>
       <div class="curr-card">
         <div class="curr-number">07</div>
         <div class="curr-title">Scaling to $10K+/Month</div>
-        <div class="curr-desc">Going from 1 deal to 10+ per month. Systems and SOPs. When to bring on help. Expanding into RVs, boats, exotics, and commercial vehicles.</div>
+        <div class="curr-desc">Going from 1 deal to 10+ per month. Systems. SOPs. When to bring on help. Expanding into RVs, boats, exotics, and commercial vehicles.</div>
       </div>
       <div class="curr-card">
         <div class="curr-number">08</div>
         <div class="curr-title">Live Deal Shadowing</div>
-        <div class="curr-desc">Work alongside Mike on real deals. Watch underwriting happen in real-time. See negotiations. Learn by doing, not just watching videos.</div>
+        <div class="curr-desc">Work alongside Mike on real deals. Watch underwriting happen in real-time. See negotiations unfold. Learn by doing, not watching recordings.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROGRAM DETAILS -->
+<!-- PROGRAM FEATURES -->
 <section>
   <div class="container">
     <div class="section-label reveal">Program Details</div>
-    <div class="section-title reveal">90 Days. Done With You.<br>Not Another Course You'll Never Finish.</div>
-    <div class="section-sub reveal">This isn't a library of videos. It's a hands-on program where you work alongside Mike on real deals.</div>
-    <div class="program-grid reveal">
-      <div class="program-feature">
-        <div class="program-icon">📞</div>
+    <div class="section-title reveal">90 Days. Done With You.<br>Not Another Course Collecting Dust.</div>
+    <div class="section-sub reveal">This isn't a library of videos you'll never finish. It's a hands-on program where you work alongside Mike on real deals.</div>
+    <div class="features-grid reveal stagger-children">
+      <div class="feature-card">
+        <div class="feature-icon">📞</div>
         <div>
           <h4>Weekly Group Coaching Calls</h4>
           <p>Live calls with Mike every week. Bring your deals, your questions, your problems. Get real-time answers.</p>
         </div>
       </div>
-      <div class="program-feature">
-        <div class="program-icon">🔍</div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
         <div>
           <h4>Live Deal Reviews</h4>
-          <p>Submit your deals. Mike underwrites them with you. Learn the VQI scoring, the math, the positioning — on your own deals.</p>
+          <p>Submit your deals. Mike underwrites them with you. Learn VQI scoring, math, positioning — on your own deals.</p>
         </div>
       </div>
-      <div class="program-feature">
-        <div class="program-icon">👥</div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
         <div>
           <h4>Small Cohort Model</h4>
-          <p>Limited seats per cohort. You're not lost in a crowd of thousands. You're in a room with people at your level, moving fast.</p>
+          <p>Limited seats. You're not lost in a crowd. You're in a room with people at your level, moving fast.</p>
         </div>
       </div>
-      <div class="program-feature">
-        <div class="program-icon">🎓</div>
+      <div class="feature-card">
+        <div class="feature-icon">🎓</div>
         <div>
           <h4>T.O.P. Method Certified</h4>
           <p>Complete the program and earn your certification. Proof you know the system inside and out.</p>
         </div>
       </div>
-      <div class="program-feature">
-        <div class="program-icon">📱</div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
         <div>
-          <h4>Community Access</h4>
-          <p>Private community of active T.O.P. Method practitioners. Share deals, ask questions, build partnerships.</p>
+          <h4>Private Community</h4>
+          <p>Active community of T.O.P. Method practitioners. Share deals, ask questions, find partners.</p>
         </div>
       </div>
-      <div class="program-feature">
-        <div class="program-icon">📋</div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
         <div>
           <h4>Full Course Library</h4>
-          <p>Every module recorded and accessible. Watch, rewatch, reference. The system documented step by step.</p>
+          <p>Every module recorded and accessible forever. Watch, rewatch, reference. The system documented step by step.</p>
         </div>
       </div>
     </div>
@@ -1210,19 +1698,19 @@ footer {
 <!-- TESTIMONIALS -->
 <section class="testimonials">
   <div class="container">
-    <div class="section-label reveal" style="text-align:center;">What Students Say</div>
+    <div class="section-label centered reveal">What Students Say</div>
     <div class="section-title reveal" style="text-align:center;">Results Speak.</div>
     <div class="section-sub reveal" style="text-align:center; margin-left:auto; margin-right:auto;">Real students. Real deals. Real revenue.</div>
-    <div class="testimonial-grid reveal">
+    <div class="testimonial-grid reveal stagger-children">
       <div class="testimonial-card">
         <div class="testimonial-stars">★ ★ ★ ★ ★</div>
-        <p class="testimonial-text">"Closed my first deal within 3 weeks of starting. Made $3,200 on a Honda Accord connection. The math-first approach made me confident I wasn't selling people something bad."</p>
+        <p class="testimonial-text">"Closed my first deal within 3 weeks. Made $3,200 on a Honda Accord connection. The math-first approach meant I wasn't selling anyone something bad. That confidence changed everything."</p>
         <div class="testimonial-author">— Coming Soon</div>
         <div class="testimonial-role">T.O.P. Method Student</div>
       </div>
       <div class="testimonial-card">
         <div class="testimonial-stars">★ ★ ★ ★ ★</div>
-        <p class="testimonial-text">"I was doing real estate wholesaling but the capital requirements were killing me. Vehicles have lower barriers, faster closings, and the demand is insane. Hit $8K in month two."</p>
+        <p class="testimonial-text">"I was wholesaling real estate but the capital requirements were killing me. Vehicles have lower barriers, faster closings, and the demand is insane. Hit $8K in month two."</p>
         <div class="testimonial-author">— Coming Soon</div>
         <div class="testimonial-role">T.O.P. Method Student</div>
       </div>
@@ -1239,10 +1727,10 @@ footer {
 <!-- PRICING -->
 <section class="pricing" id="pricing">
   <div class="container">
-    <div class="section-label reveal">Investment</div>
-    <div class="section-title reveal">Let's Talk Numbers.</div>
+    <div class="section-label centered reveal">Investment</div>
+    <div class="section-title reveal" style="text-align:center;">Let's Talk Numbers.</div>
     <div class="section-sub reveal" style="margin-left:auto; margin-right:auto; text-align:center;">You already know this program is math-first. Here's the math on the investment itself.</div>
-    <div class="pricing-card reveal">
+    <div class="pricing-card reveal scale-in">
       <div class="pricing-header">
         <div class="pricing-label">Done-With-You Program</div>
         <div class="pricing-name">T.O.P. Method Academy</div>
@@ -1261,27 +1749,27 @@ footer {
           <li>Private community of active practitioners</li>
           <li>T.O.P. Method Certified credential</li>
           <li>Templates: contracts, marketing copy, deal packages</li>
-          <li>Access to the SellFi platform (when live)</li>
+          <li>Access to the SellFi platform (sellfi.io)</li>
         </ul>
         <a href="#apply" class="pricing-cta">Apply Now →</a>
-        <div class="pricing-guarantee">The average deal earns $2,000–$5,750 in fees. Two deals covers tuition.</div>
+        <div class="pricing-guarantee">Two deals covers tuition. Everything after that is profit. Read that again.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ROI MATH -->
-<div class="container">
-  <div class="math-callout reveal">
-    <blockquote>Two deals pay for the program. Everything after that is profit. Read that again.</blockquote>
-    <cite>The math on your investment</cite>
+<!-- SECOND QUOTE -->
+<div class="quote-section reveal">
+  <div class="container">
+    <div class="quote-text">Two deals pay for the program.<br>Everything after that is profit.<br>Read that again.</div>
+    <div class="quote-cite">The math on your investment</div>
   </div>
 </div>
 
 <!-- FAQ -->
 <section>
   <div class="container">
-    <div class="section-label reveal" style="text-align:center;">Questions</div>
+    <div class="section-label centered reveal">Questions</div>
     <div class="section-title reveal" style="text-align:center;">Cool. Let's Address Those.</div>
     <div class="faq-list reveal">
       <div class="faq-item">
@@ -1290,31 +1778,27 @@ footer {
       </div>
       <div class="faq-item">
         <button class="faq-question">Is this legal?<span class="faq-icon">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Yes. Taking over payments (subject-to) is a well-established creative finance strategy used across real estate and vehicles. The T.O.P. Method uses proper contracts, documentation, and a structured transaction process. We teach you how to do this the right way.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes. Taking over payments (subject-to) is a well-established creative finance strategy used in real estate for decades and now applied to vehicles. The T.O.P. Method uses proper contracts, documentation, and a structured transaction process. We teach you how to do this the right way.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">How much can I realistically make?<span class="faq-icon">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Each deal earns $2,000–$9,000+ in fees depending on the vehicle value. TC fees range from $1,050–$2,000 per deal, and connection fees are 6-8% of the vehicle's actual cash value. At 2-3 deals per month, you're looking at $4,000–$15,000/month. At 5+ deals, you're well into five figures monthly. The math is the math — we show you real numbers, not projections.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">Do I need money to start?<span class="faq-icon">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Beyond the program investment, your startup costs are minimal. You need a phone, internet, and the ability to run basic marketing. You're not buying inventory. You're not leasing a lot. You're connecting people and earning fees for the coordination.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Each deal earns $2,000–$9,000+ in fees depending on the vehicle value. TC fees range from $1,050–$2,000 per deal, and connection fees are 6-8% of the vehicle's actual cash value. At 2-3 deals per month, you're at $6,000–$15,000/month. The deal example on this page — a regular Silverado — earned $3,170. Three of those per month = $9,510.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">What if I have no experience in cars or finance?<span class="faq-icon">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">The T.O.P. Method is a system. You follow the system. The VQI scoring tells you if a deal is good. The comparison methodology tells you how to position it. The templates handle the paperwork. You don't need to be a car expert or a finance expert — you need to follow the process.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">The T.O.P. Method is a system. You follow the system. The VQI scoring tells you if a deal is good. The comparison methodology tells you how to position it. The templates handle the paperwork. You don't need to be a car expert — you need to follow the process and let the math do the selling.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">How is this different from wholesaling cars?<span class="faq-icon">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Traditional car wholesaling requires buying inventory, needing a dealer license, and dealing with auctions. The T.O.P. Method is creative finance — you're facilitating the transfer of existing loan obligations. No inventory. No title risk. No auction drama. Different game entirely.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Traditional car wholesaling requires buying inventory, needing a dealer license, and dealing with auctions. The T.O.P. Method is creative finance — you're facilitating the transfer of existing loan obligations. No inventory. No title risk. No auction drama. You're a matchmaker and a coordinator.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">Is there a payment plan?<span class="faq-icon">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Yes. Payment plan options are discussed during your application call. We'll find something that works — because two deals should cover the entire program cost regardless.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Yes. Payment plan options are discussed during your application call. Two deals should cover the entire program cost — so the ROI timeline is measured in weeks, not years.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">Who is Mike Davis?<span class="faq-icon">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Mike Davis is the creator of the T.O.P. Method and founder of SellFi (sellfi.io) — the platform that operationalizes creative vehicle finance. He built the proprietary VQI scoring system, the fee structure, the underwriting methodology, and runs TOP Wheels, the transaction coordination arm. He's not teaching theory — he built and operates the system himself.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Mike Davis is the creator of the T.O.P. Method and founder of SellFi (sellfi.io). He built the proprietary VQI scoring system, the fee structure, the underwriting methodology, and runs TOP Wheels — the transaction coordination arm. He's not teaching theory. He built and operates the system himself, every day.</div></div>
       </div>
     </div>
   </div>
@@ -1324,7 +1808,7 @@ footer {
 <section class="apply" id="apply">
   <div class="container">
     <div class="apply-grid">
-      <div class="apply-info reveal">
+      <div class="apply-info reveal from-left">
         <div class="section-label">Apply Now</div>
         <h2>Start Your<br>Application.</h2>
         <p>Not everyone is a fit. We keep cohorts small so every student gets real attention. Fill out the application and if it looks like a match, we'll schedule a call to talk details.</p>
@@ -1335,7 +1819,7 @@ footer {
           <li>Application call to discuss fit and payment</li>
         </ul>
       </div>
-      <form class="apply-form reveal" onsubmit="handleSubmit(event)">
+      <form class="apply-form reveal from-right" onsubmit="handleSubmit(event)">
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">First Name</label>
@@ -1392,7 +1876,7 @@ footer {
 </footer>
 
 <script>
-// FAQ Accordion
+// ===== FAQ Accordion =====
 document.querySelectorAll('.faq-question').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.parentElement;
@@ -1402,18 +1886,52 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
-// Scroll Reveal
-const observer = new IntersectionObserver((entries) => {
+// ===== Deal Drawers =====
+function toggleDrawer(btn) {
+  const drawer = btn.closest('.deal-drawer');
+  drawer.classList.toggle('open');
+}
+// Auto-open drawers marked with data-open
+document.querySelectorAll('.deal-drawer[data-open="true"]').forEach(d => d.classList.add('open'));
+
+// ===== Scroll Reveal (IntersectionObserver) =====
+const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal, .stagger-children, .cf-era').forEach(el => revealObserver.observe(el));
 
-// Form handler
+// ===== Nav scroll effect =====
+const nav = document.querySelector('nav');
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+// ===== Smooth scroll =====
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+// ===== Form handler =====
 function handleSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -1421,30 +1939,11 @@ function handleSubmit(e) {
   const btn = form.querySelector('.form-submit');
   btn.textContent = 'Application Submitted ✓';
   btn.style.background = '#4ADE80';
+  btn.style.color = '#0A0A0A';
   btn.disabled = true;
   form.querySelectorAll('input, select, textarea').forEach(el => el.disabled = true);
-  // TODO: Wire to actual backend / email / webhook
   console.log('Application submitted:', Object.fromEntries(data));
 }
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});
-
-// Nav background on scroll
-const nav = document.querySelector('nav');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    nav.style.borderBottomColor = 'rgba(200,160,74,0.15)';
-  } else {
-    nav.style.borderBottomColor = 'rgba(200,160,74,0.1)';
-  }
-});
 </script>
 
 </body>
